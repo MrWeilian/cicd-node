@@ -1,0 +1,27 @@
+{
+  "name": "cicd-node",
+  "version": "1.0.0",
+  "description": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "dev": "export NODE_ENV=development && nodemon --inspect ./src/index.js --exec babel-node",
+    "build": "export NODE_ENV=production && node ./src/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@koa/router": "^12.0.0",
+    "koa": "^2.13.4",
+    "koa-body": "^5.0.0",
+    "mongoose": "^6.6.4",
+    "nodemon": "^2.0.20",
+    "jenkins": "^0.25.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-preset-es2015": "^6.24.1"
+  }
+}
