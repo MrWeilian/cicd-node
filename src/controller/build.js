@@ -1,6 +1,7 @@
 import * as jobConfig from '../services/jobConfig'
 import { RESPONSE_CODE } from '../constant'
 import * as jenkins from '../jenkins'
+import adminInstance from '../builder/admin';
 
 export async function build (ctx, next) {
   const requestBody = ctx.request.body
@@ -28,4 +29,17 @@ export async function build (ctx, next) {
   }
 
   next()
+}
+
+export function socketConnect (socket) {
+  console.log('connection suc');
+
+  const { id } = socket.handshake.query
+
+  const builder = adminInstance.getBuilder(id, socket)
+
+  socket.on('build:start', async function () {
+    console.log('build start');
+    await builder.build(socket)
+  })
 }

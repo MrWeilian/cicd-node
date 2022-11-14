@@ -3,6 +3,10 @@ import { RESPONSE_CODE } from '../constant'
 export function handleResponse () {
   return async function (ctx, next) {
     await next()
+    if (!ctx.state.apiResponse) {
+      ctx.body = null
+      return
+    }
     const { code, data, msg } = ctx.state.apiResponse
     ctx.body = getResult(code, data, msg)
   }

@@ -25,6 +25,25 @@ export async function getConfigList (ctx, next) {
   next()
 }
 
+export async function getConfigDetail (ctx, next) {
+  try {
+    const { id } = ctx.request.query
+
+    const data = await services.findJobDetail(id)
+
+    ctx.state.apiResponse = {
+      code: RESPONSE_CODE.SUC,
+      data
+    }
+  } catch (e) {
+    ctx.state.apiResponse = {
+      code: RESPONSE_CODE.ERR,
+      msg: '配置详情查询失败'
+    }
+  }
+  next()
+}
+
 export async function save (ctx, next) {
   const requestBody = ctx.request.body
 

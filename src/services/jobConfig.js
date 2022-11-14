@@ -20,6 +20,10 @@ export function countJob (params) {
   return JobModel.count(params)
 }
 
+export function findJobDetail (id) {
+  return JobModel.findById(id)
+}
+
 export function save (params) {
   return new JobModel(params).save()
 }
