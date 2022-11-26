@@ -15,9 +15,9 @@ const config = {
 // 需要自行配置jenkins config
 const jenkins = {}
 
-export async function configJob (jobName, config) {
+export async function configJob (jobName, config, rollBackHash) {
   const isExist = await jenkins.job.exists(jobName)
-  const jksConfig = getXML(config.buildCommand)
+  const jksConfig = getXML(config.buildCommand, rollBackHash)
   if (!isExist) {
     return jenkins.job.create(jobName, jksConfig)
   }

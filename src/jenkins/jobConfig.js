@@ -1,4 +1,4 @@
-const getXML = (buildShell = `pnpm install pnpm run build`) => {
+const getXML = (buildShell = `pnpm install pnpm run build`, rollBackHash = '') => {
   return `
     
     `

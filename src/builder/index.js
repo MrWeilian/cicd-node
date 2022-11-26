@@ -4,6 +4,7 @@ import * as jenkins from '../jenkins';
 export default class Build {
   constructor (id, delBuilderFn) {
     this.id = id // 配置 id
+    this.rollBackHash = '' // 配置 id
     this.isBuilding = false // 构建状态
     this.logStream = null // 存放 logStream 实例
     this.logStreamText = '' // 存放构建日志（防止构建中途进来的用户丢失之前的构建日志）
@@ -11,14 +12,14 @@ export default class Build {
     this.delBuilderFn = delBuilderFn
   }
 
-  async build (socket) {
+  async build (socket, rollBackHash) {
     this.isBuilding = true // 改变构建状态
 
     const jobName = 'test-config-job'
 
     const config = await jobConfig.findJobById(this.id)
 
-    await jenkins.configJob(jobName, config)
+    await jenkins.configJob(jobName, config, rollBackHash)
 
     const { buildNumber, logStream } = await jenkins.build(jobName)
 

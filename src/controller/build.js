@@ -34,12 +34,12 @@ export async function build (ctx, next) {
 export function socketConnect (socket) {
   console.log('connection suc');
 
-  const { id } = socket.handshake.query
+  const { id, rollBackHash } = socket.handshake.query
 
   const builder = adminInstance.getBuilder(id, socket)
 
   socket.on('build:start', async function () {
     console.log('build start');
-    await builder.build(socket)
+    await builder.build(socket, rollBackHash)
   })
 }

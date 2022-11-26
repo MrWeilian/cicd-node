@@ -15,6 +15,9 @@ const configSchema = new mongoose.Schema({
   },
   uploadPath: {
     type: String
+  },
+  history: {
+    type: Array
   }
 })
 
